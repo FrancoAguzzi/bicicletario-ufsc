@@ -1,0 +1,20 @@
+[
+	{
+		"user_name": "a",
+		"user_id": "1",
+		"user_password": "1",
+		"user_type": "comunity"
+	},
+	{
+		"user_name": "Joaquim",
+		"user_id": "2",
+		"user_password": "2",
+		"user_type": "security"
+	},
+	{
+		"user_name": "Franco",
+		"user_id": "3",
+		"user_password": "3",
+		"user_type": "comunity"
+	}
+]
