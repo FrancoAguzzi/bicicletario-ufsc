@@ -85,9 +85,7 @@ h6 {
     align-items: center;
 }
 
-.content__login,
-.content__registration,
-.content__about {
+.content__card {
     width: 30%;
     min-width: 500px;
     margin: 0 auto;

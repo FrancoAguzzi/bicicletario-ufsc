@@ -3,6 +3,7 @@ import React from 'react';
 import HeaderComponent from '../components/HeaderComponent';
 import BackgroundComponent from '../components/BackgroundComponent';
 import AuthenticatedComponent from '../components/AuthenticatedComponent';
+import CardComponent from '../components/CardComponent';
 
 class HomePage extends React.Component {
     constructor(props) {
@@ -40,55 +41,52 @@ class HomePage extends React.Component {
         }
     }
 
-    getUserType() {
+    getUserInfo() {
         let data = this.props.usersData;
+        let userInfo;
         const { typedId } = this.state;
-        let userType = 'comunity';
 
         data.find(user => {
-            if (user.user_id === typedId) userType = user.user_type;
+            if (user.user_id === typedId) userInfo = user;
         })
 
-        return userType;
+        return userInfo;
     }
 
     render() {
-
         const UnauthPage = (
-            <main className="content">
-                <div className="content__login">
-                    <img src="/assets/ufsc-logo.png" alt="UFSC Logo" className="login__logo"/>
-                    <h2 className="login__title">Bem-vindo,</h2>
-                    <p>Informe seus dados para acessar o bicicletário.</p>
-                    <label htmlFor="login__input" className="login__input-label">Matrícula UFSC:</label>
-                    <input
-                        type="text"
-                        id="login__input"
-                        className="login__input" 
-                        onKeyUp={(event) => this.updateTypedId(event)}
-                    />
-                    <label htmlFor="login__password" className="login__password-label">Senha:</label>
-                    <input
-                        type="password" 
-                        id="login__password" 
-                        className="login__password" 
-                        onKeyUp={(event) => this.updateTypedPassword(event)}
-                    />
-                    <button 
-                        className="login__button" 
-                        onClick={() => this.controlEntry()}
-                    >
-                        Entrar
-                    </button>
-                </div>
-            </main>
+            <CardComponent>
+                <img src="/assets/ufsc-logo.png" alt="UFSC Logo" className="login__logo"/>
+                <h2 className="login__title">Bem-vindo,</h2>
+                <p>Informe seus dados para acessar o bicicletário.</p>
+                <label htmlFor="login__input" className="login__input-label">Matrícula UFSC:</label>
+                <input
+                    type="text"
+                    id="login__input"
+                    className="login__input" 
+                    onKeyUp={(event) => this.updateTypedId(event)}
+                />
+                <label htmlFor="login__password" className="login__password-label">Senha:</label>
+                <input
+                    type="password" 
+                    id="login__password" 
+                    className="login__password" 
+                    onKeyUp={(event) => this.updateTypedPassword(event)}
+                />
+                <button 
+                    className="login__button" 
+                    onClick={() => this.controlEntry()}
+                >
+                    Entrar
+                </button>
+            </CardComponent>
         )
 
         return (
             <div className="app">
                 <HeaderComponent />
                 <BackgroundComponent />
-                { this.state.isAuthenticated ? <AuthenticatedComponent userType={this.getUserType()} userId={this.state.typedId}/> : UnauthPage }
+                {this.state.isAuthenticated ? <AuthenticatedComponent userInfo={this.getUserInfo()}/> : UnauthPage}
             </div>
         )
     }

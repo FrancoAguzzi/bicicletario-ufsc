@@ -1,8 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-import HeaderComponent from '../components/HeaderComponent';
-import BackgroundComponent from '../components/BackgroundComponent';
+import CardComponent from './CardComponent';
 
 class AuthenticatedComponent extends React.Component {
     constructor(props) {
@@ -11,13 +10,13 @@ class AuthenticatedComponent extends React.Component {
 
     deleteUser() {
         if (window.confirm('Deseja mesmo excluir seu cadastro?')) {
-            axios.delete(`http://localhost:3000/users/${this.props.userId}`);
+            axios.delete(`http://localhost:3000/users/${this.props.userInfo.user_id}`);
             window.location.href = "http://localhost:3001";
         }
     }
 
     renderReportsButton() {
-        if (this.props.userType === "security") {
+        if (this.props.userInfo.user_type === "security") {
             return (
                 <div className="login__reports">
                     <input type="button" id="login__reports" className="login__reports-input" value="Gerar relatórios" />
@@ -31,9 +30,8 @@ class AuthenticatedComponent extends React.Component {
 
     render() {
         return (
-            <main className="content">
-                <div className="content__login">
-                    <h2 className="login__title">Bem-vindo,</h2>
+            <CardComponent>
+                <h2 className="login__title">Bem-vindo, {this.props.userInfo.user_name}!</h2>
                     <p className="login__text">Guarde sua bicicleta em um local vago</p>
                     <div className="login__buttons">
                         <div className="login__delete">
@@ -50,9 +48,8 @@ class AuthenticatedComponent extends React.Component {
                         </div>
                         { this.renderReportsButton() }
                     </div>
-                    <a href="http://localhost:3001" className="login__button">Sair</a>
-                </div>
-            </main>
+                <a href="http://localhost:3001" className="login__button">Sair</a>
+            </CardComponent>
         )
     }
 }
