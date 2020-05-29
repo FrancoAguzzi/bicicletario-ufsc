@@ -4,6 +4,7 @@ body {
     margin: 0;
 }
 
+
 h1,
 h2,
 h3,
@@ -138,6 +139,7 @@ h6 {
     border-radius: 2px;
     transition: all .2s;
     text-decoration: none;
+    outline: none;
 }
 
 .login__button {
@@ -199,6 +201,7 @@ h6 {
     border-radius: 4px;
     width: 100%;
     border: none;
+    outline: none;
     font-family: 'Roboto', sans-serif;
     box-sizing: border-box;
 } 
@@ -287,4 +290,131 @@ h6 {
 .login__update-input:hover + label::before,
 .login__reports-input:hover + label::before {
     right: 2px;
+}
+
+.confirmation {
+    min-width: 400px;
+    min-height: 200px;
+    background-color: #2364aa;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    left: calc(50% - 200px);
+    top: calc(50% - 100px);
+    box-shadow: 0px 0 20px #000;
+}
+
+.advise {
+    width: 300px;
+    height: 150px;
+    background-color: #2364aa;
+    position: absolute;
+    left: calc(50% - 150px);
+    top: calc(50% - 75px);
+    box-shadow: 0px 0 10px #000;
+    display: flex;
+    justify-content: center;
+}
+
+.update {
+    width: 350px;
+    height: 400px;
+    background-color: #2364aa;
+    position: absolute;
+    top: calc(50% - 200px);
+    left: calc(50% - 200px);
+    box-shadow: 0px 0 10px #000;
+}
+
+.confirmation__modal,
+.advise__modal,
+.update__modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    color: #fff;
+}
+
+.confirmation__buttons {
+    display: flex;
+    width: 60%;
+    justify-content: space-around;
+}
+
+.confirmation__button,
+.advise__button,
+.update__form-submit {
+    padding: 10px 15px;
+    border: none;
+    background-color: #fff;
+    color: #2364aa;
+    outline: none;
+    border-radius: 2px;
+    transition: all .4s;
+}
+
+.confirmation__button:hover,
+.advise__button:hover,
+.update__form-submit:hover {
+    background-color: #6e9fd391;
+    color: #fff;
+    cursor: pointer;
+    transition: all .4s;
+}
+
+.update__close {
+    width: 30px;
+    height: 30px;
+    align-self: flex-end;
+    border: none;
+    background: transparent;
+    margin: 10px 10px 0 0;
+    outline: none;
+}
+
+.update__close:hover {
+    cursor: pointer;
+    transform: rotateZ(180deg);
+    transition: all .4s;
+}
+
+.update__close-image {
+    width: 100%;
+    height: 100%;
+}
+
+.update__message {
+    font-size: 20px;
+}
+
+.update__form {
+    display: flex;
+    flex-direction: column;
+}
+
+.update__form-label {
+    font-size: 16px;
+    margin-top: 12%;
+}
+
+.update__form-input {
+    outline: none;
+    padding: 10px 20px 10px 20px;
+    background-color: #fff;
+    border: none;
+    color: #2364aa;
+    border-radius: 4px;
+    margin-top: 10px;
+    box-sizing: border-box;
+    transition: all .4s;
+}
+
+.update__form-submit {
+    margin-top: 20%;
+
 }
