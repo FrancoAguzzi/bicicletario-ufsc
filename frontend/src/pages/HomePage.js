@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 import HeaderComponent from '../components/HeaderComponent';
 import BackgroundComponent from '../components/BackgroundComponent';
@@ -37,6 +38,8 @@ class HomePage extends React.Component {
         }
 
         if (data.some(user => user.user_id === typedId && user.user_password === typedPassword)) {
+            console.log('entrada')
+            axios.post('http://localhost:3000/reports', { report_user: this.getUserInfo() });
             this.setState({ isAuthenticated: true })
         } else {
             this.setState({ showLoginAdvise: true });

@@ -4,13 +4,15 @@ import axios from 'axios';
 import CardComponent from './CardComponent';
 import ConfirmationComponent from './ConfirmationComponent';
 import UpdateRegisterModal from './UpdateRegisterModal';
+import ReportsModal from './ReportsModal';
 
 class AuthenticatedComponent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             showDeleteConfirmation: false,
-            showUpdateModal: false
+            showUpdateModal: false,
+            showReportsModal: false
         }
     }
 
@@ -23,12 +25,18 @@ class AuthenticatedComponent extends React.Component {
         if (this.props.userInfo.user_type === "security") {
             return (
                 <div className="login__reports">
-                    <input type="button" id="login__reports" className="login__reports-input" value="Gerar relatórios" />
+                    <input type="button" id="login__reports" className="login__reports-input" value="Gerar relatórios" onClick={() => this.setState({ showReportsModal: true })}/>
                     <label htmlFor="login__reports" className="login__reports-label">
                         <img src="/assets/reports.svg" alt="Reports Icon" className="login__reports-image"/>
                     </label>
                 </div>
             )
+        }
+    }
+
+    renderReportsModal() {
+        if (this.state.showReportsModal) {
+            return (<ReportsModal onClose={() => this.setState({ showReportsModal: false })} />)
         }
     }
 
@@ -69,6 +77,7 @@ class AuthenticatedComponent extends React.Component {
                             { this.renderReportsButton() }
                             { this.renderUpdateModal() }
                         </div>
+                        { this.renderReportsModal() }
                     <a href="http://localhost:3001" className="login__button">Sair</a>
                 </CardComponent>
             </>

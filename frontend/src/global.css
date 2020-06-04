@@ -320,7 +320,6 @@ h6 {
 
 .update {
     width: 350px;
-    height: 400px;
     background-color: #2364aa;
     position: absolute;
     top: calc(50% - 200px);
@@ -328,9 +327,22 @@ h6 {
     box-shadow: 0px 0 10px #000;
 }
 
+.reports {
+    min-width: 375px;
+    width: 80%;
+    height: 700px;
+    background-color: #2364aa;
+    position: absolute;
+    top: calc(50% - 300px);
+    left: calc(50% - (80% / 2));
+    box-shadow: 0px 0 10px #000;
+    overflow: auto;
+}
+
 .confirmation__modal,
 .advise__modal,
-.update__modal {
+.update__modal,
+.reports__modal {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -348,7 +360,7 @@ h6 {
 
 .confirmation__button,
 .advise__button,
-.update__form-submit {
+.update__submit {
     padding: 10px 15px;
     border: none;
     background-color: #fff;
@@ -360,14 +372,15 @@ h6 {
 
 .confirmation__button:hover,
 .advise__button:hover,
-.update__form-submit:hover {
+.update__submit:hover {
     background-color: #6e9fd391;
     color: #fff;
     cursor: pointer;
     transition: all .4s;
 }
 
-.update__close {
+.update__close,
+.reports__close {
     width: 30px;
     height: 30px;
     align-self: flex-end;
@@ -377,32 +390,30 @@ h6 {
     outline: none;
 }
 
-.update__close:hover {
+.update__close:hover,
+.reports__close-image:hover {
     cursor: pointer;
     transform: rotateZ(180deg);
     transition: all .4s;
 }
 
-.update__close-image {
+.update__close-image,
+.reports__close-image {
     width: 100%;
     height: 100%;
 }
 
-.update__message {
+.update__message,
+.reports__message {
     font-size: 20px;
 }
 
-.update__form {
-    display: flex;
-    flex-direction: column;
-}
-
-.update__form-label {
+.update__label {
     font-size: 16px;
     margin-top: 12%;
 }
 
-.update__form-input {
+.update__input {
     outline: none;
     padding: 10px 20px 10px 20px;
     background-color: #fff;
@@ -414,7 +425,23 @@ h6 {
     transition: all .4s;
 }
 
-.update__form-submit {
-    margin-top: 20%;
+.update__submit {
+    margin: 10% 0;
+}
 
+.reports__table {
+    display: table;
+    border-collapse: collapse;
+    margin-bottom: 5%;
+}
+
+.reports__tableh,
+.reports__tabledata {
+    padding: 10px 30px;
+    text-align: center;
+}
+
+.reports__table,
+.reports__tableh {
+    border: 1px solid #fff;
 }

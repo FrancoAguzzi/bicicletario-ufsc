@@ -33,7 +33,7 @@ module.exports = {
         const users = JSON.parse(fs.readFileSync(filePath));
 
         const updatedUsers = users.map(user => {
-            if (user.id === request.params.id) {
+            if (user.user_id === request.params.id) {
                 return ({
                     ...user,
                     ...request.body,
@@ -42,8 +42,6 @@ module.exports = {
 
             return user;
         })
-
-        console.log(JSON.stringify(updatedUsers))
         
         fs.writeFileSync(filePath, JSON.stringify(updatedUsers, null, '\t'));
 
