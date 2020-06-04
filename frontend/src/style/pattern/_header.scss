@@ -1,0 +1,48 @@
+.header {
+    width: 100%;
+    display: flex;
+    background-color: #2364aa;
+    box-shadow: 0 10px 30px #000;
+
+    &__navigation {
+        width: 50%;
+        margin: 0 0 0 12.5%;
+        height: 10vh;
+        display: flex;
+        align-items: center;
+
+        &-link {
+            list-style: none;
+            font-family: 'Roboto', sans-serif;
+            text-transform: uppercase;
+            color: #FEC601;
+            font-size: 20px;
+            text-decoration: none;
+            transition: all .2s ease-in;
+
+            &:hover {
+                color: white;
+                transition: all .2s ease-in;
+            }
+        }
+
+        &-links {
+            width: 100%;
+            padding: 0;
+            display: flex;
+            justify-content: space-around;
+        }
+    }
+
+    &__logo {
+        margin-left: 2%;
+        width: 200px;
+
+        &-image {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+
+}

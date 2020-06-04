@@ -1,10 +1,10 @@
 import React from 'react';
 import axios from 'axios';
 
-import CardComponent from './CardComponent';
-import ConfirmationComponent from './ConfirmationComponent';
-import UpdateRegisterModal from './UpdateRegisterModal';
-import ReportsModal from './ReportsModal';
+import CardComponent from './pattern/CardComponent';
+import ConfirmationComponent from './modal/ConfirmationModal';
+import UpdateRegisterModal from './modal/UpdateRegisterModal';
+import ReportsModal from './modal/ReportsModal';
 
 class AuthenticatedComponent extends React.Component {
     constructor(props) {

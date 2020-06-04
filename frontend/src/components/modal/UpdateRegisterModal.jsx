@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import AdviseComponent from './AdviseComponent';
+import AdviseModal from './AdviseModal';
 
 class UpdateRegisterModal extends React.Component {
     constructor(props) {
@@ -9,7 +9,8 @@ class UpdateRegisterModal extends React.Component {
             user: {
                 user_name: props.userInfo.user_name,
                 user_password: props.userInfo.user_password
-            }
+            },
+            showUpdatedModal: false
         }
     }
 
@@ -25,10 +26,22 @@ class UpdateRegisterModal extends React.Component {
 
     updateUserInfo() {
         axios.put(`http://localhost:3000/users/${this.props.userInfo.user_id}`, { user_name: this.state.user_name, user_password: this.state.user_password });
+        this.setState({ showUpdatedModal: true })
+    }
+
+    renderUpdatedModal() {
+        if (this.state.showUpdatedModal) {
+            return <AdviseModal message="Os campos preenchidos foram atualizados!" onOk={() => {
+                    this.setState({ showUpdatedModal: false });
+                    window.location.href="http://localhost:3001"
+                }
+            }/>
+        }
     }
 
     render() {
         return (
+            <>
             <div className="update">
                 <div className="update__modal">
                     <button className="update__close" onClick={this.props.onClose}>
@@ -42,6 +55,8 @@ class UpdateRegisterModal extends React.Component {
                     <input type="submit" value="Atualizar" className="update__submit" onClick={() => this.updateUserInfo()}/>
                 </div>
             </div>
+            {this.renderUpdatedModal()}
+            </>
         )
     }
 }

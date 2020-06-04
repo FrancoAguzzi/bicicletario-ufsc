@@ -1,0 +1,10 @@
+.background {
+    position: fixed;
+    width: 100%;
+    padding-bottom: 90vh;
+    background: url('../assets/bicicletario.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    z-index: -1;
+}

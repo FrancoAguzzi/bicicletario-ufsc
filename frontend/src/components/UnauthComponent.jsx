@@ -1,6 +1,6 @@
 import React from 'react';
 
-import CardComponent from './CardComponent';
+import CardComponent from './pattern/CardComponent';
 
 export default props => 
     <CardComponent>

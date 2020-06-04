@@ -1,0 +1,127 @@
+// Login Page
+.login {
+
+    &__logo {
+        width: 100px;
+        height: 100px;
+    }
+
+    &__title {
+        width: 60%;
+        padding-top: 5%;
+        text-align: center;
+    }
+
+    &__input,
+    &__password {
+        width: 50%;
+        padding: 10px 20px;
+        margin: 10px 0;
+        border-radius: 4px;
+        outline: none;
+        border: none;
+        font-family: 'Roboto', sans-serif;
+
+        &-label {
+            margin-top: 5%;
+        }
+    }
+
+    &__button {
+        padding: 10px 30px;
+        border: none;
+        font-family: 'Roboto', sans-serif;
+        background-color: #2364aa;
+        color: #fff;
+        border-radius: 2px;
+        transition: all .2s;
+        text-decoration: none;
+        outline: none;
+        margin-top: 10%;
+
+        &:hover {
+            background-color: #195697;
+            cursor: pointer;
+            transition: all .2s;
+        }
+    }
+}
+
+
+// Authenticated Page
+.login {
+    
+    &__buttons {
+        transform: translateX(20px);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        height: 25%;
+    }
+
+    &__delete,
+    &__update,
+    &__reports {
+        position: relative;
+        min-height: 30px;
+        display: flex;
+        cursor: pointer;
+
+        &-image {
+            width: 20px;
+            height: 20px;
+        }
+
+        &-label {
+            position: absolute;
+            left: -35px;
+            width: 40px;
+            height: 100%;
+            background-color: #2364aa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px 0 0 4px;
+            cursor: pointer;
+            transition: all .4s;
+
+            &:before {
+                content: "";
+                position: absolute;
+                right: -5px;
+                width: 10px;
+                height: 10px;
+                background-color: #2364aa;
+                transform: rotate(45deg);
+                transition: all .4s;
+            }
+        }
+
+        &-input {
+            outline: none;
+            height: 100%;
+            padding: 10px 20px 10px 20px;
+            background-color: #fff;
+            border: none;
+            border-radius: 4px;
+            color: #2364aa;
+            font-weight: bold;
+            font-size: 16px;
+            font-family: 'Roboto', sans-serif;
+            box-sizing: border-box;
+            cursor: pointer;
+            transition: all .4s;
+
+            &:hover + label {
+                width: calc(100% + 35px);
+                border-radius: 4px;
+                transition: all .4s;
+            }
+
+            &:hover + label:before {
+                right: 2px;
+            }
+        }
+    }
+}

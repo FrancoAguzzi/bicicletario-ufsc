@@ -1,11 +1,11 @@
 import React from 'react';
 import axios from 'axios';
 
-import HeaderComponent from '../components/HeaderComponent';
-import BackgroundComponent from '../components/BackgroundComponent';
+import HeaderComponent from '../components/pattern/HeaderComponent';
+import BackgroundComponent from '../components/pattern/BackgroundComponent';
 import AuthenticatedComponent from '../components/AuthenticatedComponent';
 import UnauthComponent from '../components/UnauthComponent';
-import AdviseComponent from '../components/AdviseComponent';
+import AdviseComponent from '../components/modal/AdviseModal';
 
 class HomePage extends React.Component {
     constructor(props) {

@@ -1,8 +1,8 @@
 import React from 'react';
 
-import HeaderComponent from '../components/HeaderComponent';
-import BackgroundComponent from '../components/BackgroundComponent';
-import CardComponent from '../components/CardComponent';
+import HeaderComponent from '../components/pattern/HeaderComponent';
+import BackgroundComponent from '../components/pattern/BackgroundComponent';
+import CardComponent from '../components/pattern/CardComponent';
 
 class AboutPage extends React.Component {
     render() {

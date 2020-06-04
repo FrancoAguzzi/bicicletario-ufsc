@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import './global.css'
+import './style/global.css'
 
 import Routes from './routes';
 
