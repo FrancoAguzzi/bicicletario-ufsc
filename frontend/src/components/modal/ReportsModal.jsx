@@ -16,16 +16,18 @@ class ReportsModal extends React.Component {
     }
 
     renderReportsTable() {
-        return this.state.getReports.map((report, index) => {
-            return (
-                <tr className="reports__tablerow" key={report.report_id}>
-                    <td className="reports__tabledata">{report.report_user.user_id}</td>
-                    <td className="reports__tabledata">{report.report_user.user_name}</td>
-                    <td className="reports__tabledata">{report.report_date}</td>
-                    <td className="reports__tabledata">{report.report_time}</td>
-                </tr>
-            )
-        })
+        if (this.state.getReports.length) {
+            return this.state.getReports.map((report, index) => {
+                return (
+                    <tr className="reports__tablerow" key={report.report_id}>
+                        <td className="reports__tabledata">{report.report_user.user_id}</td>
+                        <td className="reports__tabledata">{report.report_user.user_name}</td>
+                        <td className="reports__tabledata">{report.report_date}</td>
+                        <td className="reports__tabledata">{report.report_time}</td>
+                    </tr>
+                )
+            })
+        }
     }
 
     render() {

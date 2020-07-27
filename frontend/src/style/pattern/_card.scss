@@ -4,11 +4,12 @@
     margin: 0 auto;
     height: 80%;
     min-height: 450px;
-    background: linear-gradient(rgb(255, 216, 75), rgb(253, 207, 42), rgb(255, 203, 17));
+    max-height: 900px;
+    background: linear-gradient(var(--color-yellow-light), var(--color-yellow), var(--color-yellow-dark));
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-family: 'Roboto', sans-serif;
-    box-shadow: 5px 10px 20px #000;
+    font-family: var(--primary-font);
+    box-shadow: 5px 10px 20px var(--color-dark);
 }

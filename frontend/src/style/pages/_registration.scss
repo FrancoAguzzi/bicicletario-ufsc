@@ -39,15 +39,15 @@
         width: 100%;
         border: none;
         outline: none;
-        font-family: 'Roboto', sans-serif;
+        font-family: var(--primary-font);
         box-sizing: border-box;
     } 
     &__submit-button {
         padding: 10px 30px;
         border: none;
-        font-family: 'Roboto', sans-serif;
-        background-color: #2364aa;
-        color: #fff;
+        font-family: var(--primary-font);
+        background-color: var(--color-blue);
+        color: var(--color-white);
         border-radius: 2px;
         transition: all .2s;
         text-decoration: none;
@@ -55,7 +55,7 @@
         margin-top: 30%;
 
         &:hover {
-            background-color: #195697;
+            background-color: var(--color-blue-dark);
             cursor: pointer;
             transition: all .2s;
         }

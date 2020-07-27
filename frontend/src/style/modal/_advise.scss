@@ -1,11 +1,11 @@
 .advise {
     min-width: 300px;
     height: 150px;
-    background-color: #2364aa;
+    background-color: var(--color-blue);
     position: absolute;
     left: calc(50% - 150px);
     top: calc(50% - 75px);
-    box-shadow: 0px 0 10px #000;
+    box-shadow: 0px 0 10px var(--color-dark);
     display: flex;
     justify-content: center;
 
@@ -18,22 +18,22 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        font-family: 'Roboto', sans-serif;
-        color: #fff;
+        font-family: var(--primary-font);
+        color: var(--color-white);
     }
 
     &__button {
         padding: 10px 15px;
         border: none;
-        background-color: #fff;
-        color: #2364aa;
+        background-color: var(--color-white);
+        color: var(--color-blue);
         outline: none;
         border-radius: 2px;
         transition: all .4s;
 
         &:hover {
-            background-color: #6e9fd391;
-            color: #fff;
+            background-color: var(--color-blue-light);
+            color: var(--color-white);
             cursor: pointer;
             transition: all .4s;
         }

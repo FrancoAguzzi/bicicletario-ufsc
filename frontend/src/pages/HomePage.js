@@ -19,18 +19,18 @@ class HomePage extends React.Component {
     }
 
     updateTypedId(event) {
-        if (event.key === "Enter") this.controlEntry();
+        if (event.key === "Enter") this.controlEntry(event);
         else this.setState({ typedId: event.target.value });
     }
 
     updateTypedPassword(event) {
-        if (event.key === "Enter") this.controlEntry();
+        if (event.key === "Enter") this.controlEntry(event);
         else this.setState({ typedPassword: event.target.value });
     }
     
     controlEntry() {
         let data = this.props.usersData;
-        const { typedId, typedPassword, isAuthenticated } = this.state;
+        const { typedId, typedPassword } = this.state;
 
         if (!typedId || !typedPassword) {
             this.setState({ showLoginAdvise: true });
@@ -38,9 +38,8 @@ class HomePage extends React.Component {
         }
 
         if (data.some(user => user.user_id === typedId && user.user_password === typedPassword)) {
-            console.log('entrada')
-            axios.post('http://localhost:3000/reports', { report_user: this.getUserInfo() });
-            this.setState({ isAuthenticated: true })
+            axios.post('http://localhost:3000/reports', { report_user: this.getUserInfo() })
+            return this.setState({ isAuthenticated: true });
         } else {
             this.setState({ showLoginAdvise: true });
             return false

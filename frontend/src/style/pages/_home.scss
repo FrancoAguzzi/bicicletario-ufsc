@@ -1,6 +1,5 @@
 // Login Page
 .login {
-
     &__logo {
         width: 100px;
         height: 100px;
@@ -8,8 +7,12 @@
 
     &__title {
         width: 60%;
-        padding-top: 5%;
+        margin-top: 5%;
         text-align: center;
+    }
+
+    &__text {
+        margin: 2% 0;
     }
 
     &__input,
@@ -20,7 +23,7 @@
         border-radius: 4px;
         outline: none;
         border: none;
-        font-family: 'Roboto', sans-serif;
+        font-family: var(--primary-font);
 
         &-label {
             margin-top: 5%;
@@ -30,26 +33,50 @@
     &__button {
         padding: 10px 30px;
         border: none;
-        font-family: 'Roboto', sans-serif;
-        background-color: #2364aa;
-        color: #fff;
+        font-family: var(--primary-font);
+        background-color: var(--color-blue);
+        color: var(--color-white);
         border-radius: 2px;
         transition: all .2s;
         text-decoration: none;
         outline: none;
-        margin-top: 10%;
+        margin-top: 5%;
 
         &:hover {
-            background-color: #195697;
+            background-color: var(--color-blue-dark);
             cursor: pointer;
             transition: all .2s;
         }
     }
 }
 
-
 // Authenticated Page
 .login {
+    &__animation {
+        margin: 0 15% 0 7%;
+        width: 80%;
+
+        & svg {
+            width: 100%;
+
+            & #bike {
+                animation: bikeAnimation 3s forwards;
+            }
+
+            & #front-wheel,
+            & #back-wheel {
+                transform-box: fill-box;
+                transform-origin: center;
+                animation: wheelAnimation 3s forwards;
+            }
+        }
+
+        @media screen and (max-height: 800px) {
+            svg {
+                height: 150px;
+            }
+        }
+    }
     
     &__buttons {
         transform: translateX(20px);
@@ -78,7 +105,7 @@
             left: -35px;
             width: 40px;
             height: 100%;
-            background-color: #2364aa;
+            background-color: var(--color-blue);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -92,7 +119,7 @@
                 right: -5px;
                 width: 10px;
                 height: 10px;
-                background-color: #2364aa;
+                background-color: var(--color-blue);
                 transform: rotate(45deg);
                 transition: all .4s;
             }
@@ -102,13 +129,13 @@
             outline: none;
             height: 100%;
             padding: 10px 20px 10px 20px;
-            background-color: #fff;
+            background-color: var(--color-white);
             border: none;
             border-radius: 4px;
-            color: #2364aa;
+            color: var(--color-blue);
             font-weight: bold;
             font-size: 16px;
-            font-family: 'Roboto', sans-serif;
+            font-family: var(--primary-font);
             box-sizing: border-box;
             cursor: pointer;
             transition: all .4s;
@@ -123,5 +150,20 @@
                 right: 2px;
             }
         }
+    }
+}
+
+@keyframes wheelAnimation {
+    from {
+        transform: rotateZ(0deg);
+    } to {
+        transform: rotateZ(360deg);
+    }
+}
+@keyframes bikeAnimation {
+    from {
+        transform: translateX(0);
+    } to {
+        transform: translateX(20%);
     }
 }

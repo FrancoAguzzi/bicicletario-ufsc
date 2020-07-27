@@ -1,8 +1,8 @@
 .header {
     width: 100%;
     display: flex;
-    background-color: #2364aa;
-    box-shadow: 0 10px 30px #000;
+    background-color: var(--color-blue);
+    box-shadow: 0 10px 30px var(--color-dark);
 
     &__navigation {
         width: 50%;
@@ -13,7 +13,7 @@
 
         &-link {
             list-style: none;
-            font-family: 'Roboto', sans-serif;
+            font-family: var(--primary-font);
             text-transform: uppercase;
             color: #FEC601;
             font-size: 20px;
@@ -23,6 +23,10 @@
             &:hover {
                 color: white;
                 transition: all .2s ease-in;
+            }
+            
+            @media screen and (max-width: 768px) {
+                font-size: 14px;
             }
         }
 
@@ -43,6 +47,4 @@
             height: 100%;
         }
     }
-
-
 }

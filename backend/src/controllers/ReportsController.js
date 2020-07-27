@@ -15,8 +15,6 @@ module.exports = {
     },
 
     async createReport(request, response) {
-        console.log('trying to create report')
-
         const reports = JSON.parse(fs.readFileSync(filePath));
         const { report_user } = request.body;
         const date = new Date();
@@ -25,7 +23,9 @@ module.exports = {
         const report_date = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
         const report_time = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
 
-        reports.push({ report_id, report_user, report_date, report_time })
+        reports.push({ report_id, report_user, report_date, report_time });
+
+        console.log('CREATING REPORT');
 
         fs.writeFileSync(filePath, JSON.stringify(reports, null, '\t'));
     

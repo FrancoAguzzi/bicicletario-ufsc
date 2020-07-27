@@ -5,6 +5,7 @@ import CardComponent from './pattern/CardComponent';
 import ConfirmationComponent from './modal/ConfirmationModal';
 import UpdateRegisterModal from './modal/UpdateRegisterModal';
 import ReportsModal from './modal/ReportsModal';
+import BikeAnimation from './BikeAnimation';
 
 class AuthenticatedComponent extends React.Component {
     constructor(props) {
@@ -36,7 +37,7 @@ class AuthenticatedComponent extends React.Component {
 
     renderReportsModal() {
         if (this.state.showReportsModal) {
-            return (<ReportsModal onClose={() => this.setState({ showReportsModal: false })} />)
+            return <ReportsModal onClose={() => this.setState({ showReportsModal: false })} />
         }
     }
 
@@ -61,6 +62,9 @@ class AuthenticatedComponent extends React.Component {
                 <CardComponent>
                     <h2 className="login__title">Bem-vindo, {this.props.userInfo.user_name}!</h2>
                         <p className="login__text">Guarde sua bicicleta em um local vago</p>
+                        <div className="login__animation">
+                            <BikeAnimation />
+                        </div>
                         <div className="login__buttons">
                             <div className="login__delete">
                                 <input type="button" onClick={() => this.setState({ showDeleteConfirmation: true })} id="login__delete" className="login__delete-input" value="Cancelar cadastro" />

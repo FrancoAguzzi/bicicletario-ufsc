@@ -21,10 +21,10 @@ export default props =>
             className="login__password" 
             onKeyUp={props.onTypedPassword}
         />
-        <button 
+        <input
+            type="submit"
+            value="Entrar"
             className="login__button" 
-            onClick={props.onLogin}
-        >
-            Entrar
-        </button>
+            onSubmit={props.onLogin}
+        />
     </CardComponent>

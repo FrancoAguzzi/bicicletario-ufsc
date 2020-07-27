@@ -11,7 +11,7 @@ class RegisterPage extends React.Component {
                 <HeaderComponent />
                 <BackgroundComponent />
                 <CardComponent>
-                    <form action="http://localhost:3000/users" method="post" className="registration">
+                    <form target="_blank" action="http://localhost:3000/users" method="post" className="registration">
                         <img src="/assets/ufsc-logo.png" alt="UFSC Logo" className="login__logo"/>
                         <h2 className="registration__title">Insira seus dados:</h2>
                         <div className="registration__name">
@@ -34,7 +34,7 @@ class RegisterPage extends React.Component {
                             </select>
                         </div>
                         <div className="registration__submit">
-                            <input type="submit" className="registration__submit-button" value="Cadastrar"/>
+                            <input type="submit" className="registration__submit-button" value="Cadastrar" />
                         </div>
                     </form>
                 </CardComponent>
