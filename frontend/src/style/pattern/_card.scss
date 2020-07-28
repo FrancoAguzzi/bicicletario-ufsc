@@ -12,4 +12,9 @@
     justify-content: center;
     font-family: var(--primary-font);
     box-shadow: 5px 10px 20px var(--color-dark);
+
+    @media screen and (max-width: 550px) {
+        width: 95%;
+        min-width: 0;
+    }
 }
