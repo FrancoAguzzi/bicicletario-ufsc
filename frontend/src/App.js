@@ -5,11 +5,8 @@ import './style/global.scss'
 import Routes from './routes';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+    state = {
       usersData: []
-    }
   }
 
   componentDidMount() {
