@@ -14,6 +14,9 @@ routes.delete('/users/:id?', UsersController.deleteUsers);
 
 // Reports Routes
 routes.get('/reports', ReportsController.getReports);
-routes.post('/reports', ReportsController.createReport);
+routes.post('/reports', (req, res) => {
+    ReportsController.createReport(req, res);
+    res.sendStatus(200);
+});
 
 module.exports = routes;

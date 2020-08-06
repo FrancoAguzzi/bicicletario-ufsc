@@ -1,26 +1,14 @@
 [
 	{
-		"user_name": "doixmemo",
-		"user_id": "2",
-		"user_password": "4",
-		"user_type": "security"
-	},
-	{
-		"user_name": "a",
-		"user_id": "5",
-		"user_password": "2",
-		"user_type": "comunity"
-	},
-	{
-		"user_name": "a",
-		"user_id": "a",
-		"user_password": "a",
-		"user_type": "comunity"
-	},
-	{
 		"user_name": "Franco",
 		"user_id": "1",
+		"user_password": "1",
+		"user_type": "community"
+	},
+	{
+		"user_name": "2",
+		"user_id": "2",
 		"user_password": "2",
-		"user_type": "comunity"
+		"user_type": "security"
 	}
 ]

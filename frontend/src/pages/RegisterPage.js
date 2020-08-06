@@ -29,7 +29,7 @@ class RegisterPage extends React.Component {
                         <div className="registration__type">
                             <label htmlFor="type" className="registration__type-label">Tipo de usuário:</label>
                             <select id="type" name="user_type" className="registration__type-select">
-                                <option value="comunity" className="registration__type-option">Aluno/Servidor</option>
+                                <option value="community" className="registration__type-option">Aluno/Servidor</option>
                                 <option value="security" className="registration__type-option">Segurança</option>
                             </select>
                         </div>
