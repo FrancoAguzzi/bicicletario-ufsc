@@ -2,8 +2,8 @@
     min-width: 350px;
     background-color: var(--color-blue);
     position: absolute;
-    top: calc(50% - height);
-    left: calc(50% - width);
+    top: -140%;
+    left: -60%;
     box-shadow: 0px 0 10px var(--color-dark);
 
     &__modal {

@@ -13,7 +13,8 @@ class AuthenticatedComponent extends React.Component {
         this.state = {
             showDeleteConfirmation: false,
             showUpdateModal: false,
-            showReportsModal: false
+            showReportsModal: false,
+            vacanciesNumber: window.localStorage.getItem('vacanciesNumber')
         }
     }
 
@@ -61,7 +62,7 @@ class AuthenticatedComponent extends React.Component {
                 {this.renderDeleteConfirmation()}
                 <CardComponent>
                     <h2 className="login__title">Bem-vindo, {this.props.userInfo.user_name}!</h2>
-                        <p className="login__text">Guarde sua bicicleta em um local vago</p>
+                    <p className="login__text">{this.props.vacanciesMessage}</p>
                         <div className="login__animation">
                             <BikeAnimation />
                         </div>
@@ -84,6 +85,13 @@ class AuthenticatedComponent extends React.Component {
                         { this.renderReportsModal() }
                     <a href="http://localhost:3001" className="login__button">Sair</a>
                 </CardComponent>
+                <div className="vacancies__modal">
+                    <p className="vacancies__text">
+                        Vagas disponíveis 
+                        <br/> 
+                        <span>{this.state.vacanciesNumber}</span>
+                    </p>
+                </div>
             </>
         )
     }

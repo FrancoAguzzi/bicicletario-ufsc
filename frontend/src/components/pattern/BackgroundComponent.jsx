@@ -1,4 +1,6 @@
 import React from 'react';
 
-export default props => 
+const BackgroundComponent = props => 
     <div className="background"></div>
+
+export default BackgroundComponent;

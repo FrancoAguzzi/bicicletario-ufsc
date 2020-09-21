@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default () => 
+const BikeAnimation = () => 
     <svg width="1069" height="250" viewBox="0 0 1069 436" fill="none" xmlns="http://www.w3.org/2000/svg">
     <g id="Group 1">
     <g id="Mask Group">
@@ -50,3 +50,4 @@ export default () =>
     </g>
     </svg>
 
+export default BikeAnimation;

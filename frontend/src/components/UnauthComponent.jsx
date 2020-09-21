@@ -2,11 +2,11 @@ import React from 'react';
 
 import CardComponent from './pattern/CardComponent';
 
-export default props => 
+const UnauthComponent = props => 
     <CardComponent>
         <img src="/assets/ufsc-logo.png" alt="UFSC Logo" className="login__logo"/>
         <h2 className="login__title">Bem-vindo,</h2>
-        <p>Informe seus dados para acessar o bicicletário.</p>
+        <p className="login__text">Informe seus dados para acessar o bicicletário.</p>
         <label htmlFor="login__input" className="login__input-label">Matrícula UFSC:</label>
         <input
             type="text"
@@ -28,3 +28,5 @@ export default props =>
             onSubmit={props.onLogin}
         />
     </CardComponent>
+
+export default UnauthComponent;

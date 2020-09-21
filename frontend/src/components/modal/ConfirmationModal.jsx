@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default props =>
+const ConfirmationModal = props =>
     <div className="confirmation">
         <div className="confirmation__modal">
             <p className="confirmation__message">{props.message}</p>
@@ -10,3 +10,5 @@ export default props =>
             </div>
         </div>
     </div>
+
+export default ConfirmationModal;

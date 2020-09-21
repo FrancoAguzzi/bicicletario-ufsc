@@ -1,8 +1,13 @@
 // Login Page
 .login {
     &__logo {
-        width: 100px;
-        height: 100px;
+        width: 70px;
+        height: 70px;
+
+        @media screen and (min-width: 1024px) {
+            width: 100px;
+            height: 100px;
+        }
     }
 
     &__title {
@@ -12,21 +17,26 @@
     }
 
     &__text {
-        margin: 2% 0;
+        text-align: center;
+        margin: 5%;
+
+        @media screen and (min-width: 1024px) {
+            margin: 3% 0;
+        }
     }
 
     &__input,
     &__password {
         width: 50%;
         padding: 10px 20px;
-        margin: 10px 0;
+        margin: 2% 0;
         border-radius: 4px;
         outline: none;
         border: none;
         font-family: var(--primary-font);
 
         &-label {
-            margin-top: 5%;
+            margin-top: 3%;
         }
     }
 
@@ -151,6 +161,37 @@
             }
         }
     }
+}
+
+.vacancies {
+    &__modal {
+        position: absolute;
+        top: 12%;
+        right: 50px;
+        padding: 20px;
+        background-color: var(--color-blue);
+        border-radius: 10%;
+    }
+
+    &__text {
+        display: flex;
+        flex-direction: column;
+        justify-items: space-around;
+        font-family: var(--primary-font);
+        text-transform: capitalize;
+        color: var(--color-white);
+        text-align: center;
+        line-height: 30px;
+
+        span {
+            background-color: var(--color-white);
+            margin-top: 10px;
+            padding: 10px 20px;
+            border-radius: 10%;
+            color: var(--color-blue);
+        }
+    }
+
 }
 
 @keyframes wheelAnimation {

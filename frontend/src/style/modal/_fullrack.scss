@@ -1,0 +1,17 @@
+.fullrack {
+    position: absolute;
+    top: 15%;
+    left: 25px;
+
+    &__modal {
+        background-color: var(--color-red);
+        padding: 40px 50px;
+        box-shadow: 5px 5px 20px black;
+    }
+
+    &__message {
+        font-family: var(--primary-font);
+        color: var(--color-white);
+        font-size: 20px;
+    }
+}

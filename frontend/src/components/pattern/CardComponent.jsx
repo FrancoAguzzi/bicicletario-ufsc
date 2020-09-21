@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default props => {
+const CardComponent = props => {
     return (
         <main className="content">
             <div className="content__card">
@@ -9,3 +9,5 @@ export default props => {
         </main>
     )
 }
+
+export default CardComponent;

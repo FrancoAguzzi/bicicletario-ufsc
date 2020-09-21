@@ -1,6 +1,6 @@
 [
 	{
-		"user_name": "Franco",
+		"user_name": "João",
 		"user_id": "1",
 		"user_password": "1",
 		"user_type": "community"
@@ -10,5 +10,11 @@
 		"user_id": "2",
 		"user_password": "2",
 		"user_type": "security"
+	},
+	{
+		"user_name": "aaa",
+		"user_id": "3",
+		"user_password": "3",
+		"user_type": "community"
 	}
 ]

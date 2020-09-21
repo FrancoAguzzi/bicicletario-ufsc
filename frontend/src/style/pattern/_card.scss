@@ -1,10 +1,9 @@
 .content__card {
     width: 30%;
     min-width: 500px;
+    padding: 25px 0;
     margin: 0 auto;
     height: 80%;
-    min-height: 450px;
-    max-height: 900px;
     background: linear-gradient(var(--color-yellow-light), var(--color-yellow), var(--color-yellow-dark));
     display: flex;
     flex-direction: column;
