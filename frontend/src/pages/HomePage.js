@@ -1,141 +1,131 @@
-import React from 'react';
+import React, { useState, useEffect} from 'react';
 import axios from 'axios';
+import { getUser, getReports, postReport } from '../services'
 
 import HeaderComponent from '../components/pattern/HeaderComponent';
 import BackgroundComponent from '../components/pattern/BackgroundComponent';
 import AuthenticatedComponent from '../components/AuthenticatedComponent';
 import UnauthComponent from '../components/UnauthComponent';
-
 import FullRackModal from '../components/modal/FullRackModal';
 import AdviseModal from '../components/modal/AdviseModal';
 
-class HomePage extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            typedId: '',
-            typedPassword: '',
-            totalVacanciesNumber: props.vacanciesNumber,
-            emptyVacanciesNumber: null,
-            vacanciesMessage: 'Guarde sua bicicleta em um local vago.',
-            showLoginAdvise: false,
-            isAuthenticated: false,
-            fullBikeRack: false
+const HomePage = props => {
+    let [typedId, setTypedId] = useState('');
+    let [typedPassword, setTypedPassword] = useState('');
+    let [vacanciesMessage, setVacanciesMessage] = useState('');
+    let [showLoginAdvise, setShowLoginAdvise] = useState(false);
+    let [isAuthenticated, setIsAuthenticated] = useState(false);
+    let [isFullBikeRack, setFullBikeRack] = useState(false);
+    let [getVacanciesNumber, setVacanciesNumber] = useState(0);
+    let [getUserInfo, setUserInfo] = useState({});
+    let [getReportsList, setReportsList] = useState([]);
+
+    useEffect(() => {
+        let localStorageVacancies = window.localStorage.getItem('vacanciesNumber'); 
+        if (localStorageVacancies) {
+            setVacanciesNumber(localStorageVacancies)
+        } else {
+            window.localStorage.setItem('vacanciesNumber', props.vacanciesNumber)
         }
+    }, [])
+
+    // Update methods
+    const updateTypedId = event => {
+        if (event.key === "Enter") controlEntry(event);
+        else setTypedId(event.target.value);
     }
 
-    componentDidMount() {
-        if (!window.localStorage.getItem('vacanciesNumber')) {
-            window.localStorage.setItem('vacanciesNumber', this.state.vacanciesNumber);
-        }
-        this.setState({
-            emptyVacanciesNumber: window.localStorage.getItem('vacanciesNumber')
-        })
+    const updateTypedPassword = event => {
+        if (event.key === "Enter") controlEntry(event);
+        else setTypedPassword(event.target.value);
     }
 
-    updateTypedId(event) {
-        if (event.key === "Enter") this.controlEntry(event);
-        else this.setState({ typedId: event.target.value });
-    }
-
-    updateTypedPassword(event) {
-        if (event.key === "Enter") this.controlEntry(event);
-        else this.setState({ typedPassword: event.target.value });
-    }
-
-    updateStoredVacancies() {
-        window.localStorage.setItem('vacanciesNumber', this.state.emptyVacanciesNumber);
-        if (!this.state.emptyVacanciesNumber) this.setState({ fullBikeRack: true });
+    const updateStoredVacancies = number => {
+        setVacanciesNumber(number);
+        window.localStorage.setItem('vacanciesNumber', number);
+        if (!getVacanciesNumber) setFullBikeRack(true);
     }
     
-    controlEntry() {
-        let data = this.props.usersData;
-        const { typedId, typedPassword } = this.state;
+    // Login control
+    const controlEntry = async () => {
+        let user = await getUser(typedId);
 
         if (!typedId || !typedPassword) {
-            this.setState({ showLoginAdvise: true });
+            setShowLoginAdvise(true);
             return false
         }
 
-        if (data.some(user => user.user_id === typedId && user.user_password === typedPassword)) {
-            let reports = this.props.reportsArray;
+        if (user.data && user.data.user_password == typedPassword) {
+            setUserInfo(user.data)
+            let reports = await getReports();
             let reportsNumber = 0;
 
-            reports.forEach(report => {
-                if (typedId === report.report_user.user_id) reportsNumber += 1;
-            });
-            
-            if (this.state.emptyVacanciesNumber > 0 && reportsNumber % 2 === 0) {
-                this.setState({
-                    emptyVacanciesNumber: this.state.emptyVacanciesNumber--
+
+            if (reports.data.length) {
+                reports.data.forEach(report => {
+                    if (typedId === report.report_user.user_id) {
+                        reportsNumber += 1
+                    } 
                 })
-                this.updateStoredVacancies();
-                this.setState({ isAuthenticated: true });
-                axios.post('http://localhost:3000/reports', { report_user: this.getUserInfo() });
             }
 
-            if (this.state.emptyVacanciesNumber == 0) {
-                this.setState({ 
-                    fullBikeRack: true 
-                });
+            if (getVacanciesNumber > 0 && reportsNumber % 2 === 0) {
+                updateStoredVacancies(parseInt(getVacanciesNumber) - 1)
+                setVacanciesMessage('Guarde sua bicicleta em um local vago.')
+                setIsAuthenticated(true)
+                postReport({ report_user: user.data })
             }
 
             if (reportsNumber % 2 !== 0) {
-                this.setState({ 
-                    emptyVacanciesNumber: this.state.emptyVacanciesNumber++,
-                    vacanciesMessage: 'Retire sua bicicleta do bicicletário.'
-                });
-                this.updateStoredVacancies();
-                this.setState({ isAuthenticated: true });
-                axios.post('http://localhost:3000/reports', { report_user: this.getUserInfo() });
+                updateStoredVacancies(parseInt(getVacanciesNumber) + 1)
+                setVacanciesMessage('Retire sua bicicleta do bicicletário.')
+                setIsAuthenticated(true)
+                postReport({ report_user: user.data })
             }
-            
+
+            reports = await getReports();
+            setReportsList(reports.data)
+
+            if (getVacanciesNumber == 0) {
+                setFullBikeRack(true)
+                return false
+            }
         } else {
-            this.setState({ showLoginAdvise: true });
-            return false
+            setShowLoginAdvise(true);
         }
     }
 
-    getUserInfo() {
-        let data = this.props.usersData;
-        let userInfo;
-        const { typedId } = this.state;
-
-        data.find(user => {
-            if (user.user_id === typedId) userInfo = user;
-        })
-
-        return userInfo;
-    }
-
-    renderLoginAdvise() {
-        if (this.state.showLoginAdvise) {
-            return <AdviseModal message="Credencial inválida!" onOk={() => this.setState({ showLoginAdvise: false })}/>
+    // Modal rendering
+    const renderLoginAdvise = () => {
+        if (showLoginAdvise) {
+            return <AdviseModal message="Credencial inválida!" onOk={() => setShowLoginAdvise(false)}/>
         }
     }
 
-    renderFullRackAdvise() {
-        if (this.state.fullBikeRack && !this.state.isAuthenticated) {
-            return <FullRackModal message="Bicicletário lotado. Favor dirija-se à próxima unidade."/>
+    const renderFullRackAdvise = () => {
+        if (isFullBikeRack && !isAuthenticated) {
+            return <FullRackModal message="Bicicletário lotado. Por favor dirija-se à próxima unidade."/>
         }
     }
 
-    render() {
-        return (
-            <div className="app">
-                <HeaderComponent />
-                <BackgroundComponent />
-                {this.state.isAuthenticated ? 
-                    <AuthenticatedComponent vacanciesMessage={this.state.vacanciesMessage} userInfo={this.getUserInfo()} /> 
-                    : <UnauthComponent onTypedId={(e) => this.updateTypedId(e)} 
-                                     onTypedPassword={(e) => this.updateTypedPassword(e)}
-                                     onLogin={(e) => this.controlEntry(e)}/>
-                }
-                {this.renderLoginAdvise()}
-                {this.renderFullRackAdvise()}
-            </div>
-        )
-    }
+    return (
+        <div className="app">
+            <HeaderComponent />
+            <BackgroundComponent />
+            {isAuthenticated ? 
+                <AuthenticatedComponent 
+                    vacanciesMessage={vacanciesMessage} 
+                    vacanciesNumber={getVacanciesNumber}
+                    reportsList={getReportsList}
+                    userInfo={getUserInfo} />
+                : <UnauthComponent onTypedId={(e) => updateTypedId(e)} 
+                                    onTypedPassword={(e) => updateTypedPassword(e)}
+                                    onLogin={(e) => controlEntry(e)}/>
+            }
+            {renderLoginAdvise()}
+            {renderFullRackAdvise()}
+        </div>
+    )
 }
 
 export default HomePage;

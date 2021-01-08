@@ -5,18 +5,14 @@ import AboutPage from './pages/AboutPage';
 import HomePage from './pages/HomePage';
 import RegisterPage from './pages/RegisterPage';
 
-export default function Routes(props) {
-    let usersData = props.usersData;
-    let vacanciesNumber = props.vacanciesNumber;
-    let reportsArray = props.reportsArray;
-
+const Routes = props => {
     return (
         <BrowserRouter>
-            <Route 
-            exact path="/" 
-            render={() => <HomePage vacanciesNumber={vacanciesNumber} reportsArray={reportsArray} usersData={usersData} />} />
+            <Route exact path="/" component={() => <HomePage vacanciesNumber={props.vacanciesNumber} />} />
             <Route path="/sobre" component={AboutPage} />
-            <Route path="/cadastrar" render={(props) => <RegisterPage usersData={usersData} />} />
+            <Route path="/cadastrar" component={RegisterPage} />
         </BrowserRouter>
     )
 }
+
+export default Routes;

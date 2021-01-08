@@ -2,33 +2,44 @@ const fs = require('fs');
 const { join } = require('path');
 const filePath = join(__dirname, '../database/reports.json');
 
+const { readReports, createReport } = require('../database/database')
+
 module.exports = {
 
     async getReports(request, response) {
-        const data = fs.existsSync ? fs.readFileSync(filePath) : [];
-
-        try {
-            return response.send(data);
-        } catch {
-            return [];
-        }
+        readReports()
+            .then(data => {
+                if (!data) {
+                    response.status(404).send({
+                        message: `Couldn't find reports`
+                    })
+                } else {
+                    response.send(data) 
+                }
+            })
+            .catch(err => {
+                console.log(err);
+                response.status(500).send({
+                    message: err.message
+                })
+            })
     },
 
-    async createReport(request, response) {
-        const reports = JSON.parse(fs.readFileSync(filePath));
-        const { report_user } = request.body;
-        const date = new Date();
-
-        const report_id = date.getTime();
-        const report_date = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
-        const report_time = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
-
-        reports.push({ report_id, report_user, report_date, report_time });
-
-        console.log('CREATING REPORT');
-
-        fs.writeFileSync(filePath, JSON.stringify(reports, null, '\t'));
-    
-        return response.status(201);
+    async postReport(request, response) {
+        createReport(request)
+            .then(data => {
+                if (!data) {
+                    response.status(409).send({
+                        message: `User with id ${request.body.user_id} already exists.`
+                    })
+                } else {
+                    response.send(data)
+                }
+            })
+            .catch(err => {
+                response.status(500).send({
+                    message: err.message
+                });
+            });
     }
 }

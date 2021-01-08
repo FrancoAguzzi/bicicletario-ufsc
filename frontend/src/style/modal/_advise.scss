@@ -1,10 +1,10 @@
 .advise {
-    min-width: 300px;
+    width: 300px;
     height: 150px;
     background-color: var(--color-blue-dark);
     position: absolute;
     left: calc(50% - 160px);
-    top: -60%;
+    top: calc(50% - 150px);
     box-shadow: 0px 0 10px var(--color-dark);
     display: flex;
     justify-content: center;

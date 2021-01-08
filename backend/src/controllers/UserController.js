@@ -2,65 +2,80 @@ const fs = require('fs');
 const { join } = require('path');
 const filePath = join(__dirname, '../database/users.json');
 
+const { readUser, createUser, updateUser, deleteUser } = require('../database/database')
+
 module.exports = {
 
-    async getUsers(request, response) {
-        const data = fs.existsSync ? fs.readFileSync(filePath) : [];
-
-        try {
-            return response.send(data);
-        } catch {
-            return [];
-        }
-    },
-
-    async createUsers(request, response) {
-        const users = JSON.parse(fs.readFileSync(filePath));
-        const { user_name, user_id, user_password, user_type } = request.body;
-
-        if (users.some(user => user.user_id === user_id)) {
-            return response.status(406).send('User ID already registered')
-        }
-
-        users.push({ user_name, user_id, user_password, user_type })
-
-        fs.writeFileSync(filePath, JSON.stringify(users, null, '\t'));
-    
-        return response.status(201).send('New user registered successfully');
-    },
-
-    async updateUsers(request, response) {
-        const users = JSON.parse(fs.readFileSync(filePath));
-
-        const updatedUsers = users.map(user => {
-            if (user.user_id === request.params.id) {
-                return ({
-                    ...user,
-                    ...request.body,
+    async getUser(request, response) {
+        readUser(request.params.id)
+            .then(data => {
+                if (!data) {
+                    response.status(404).send({
+                        message: `Couldn't find user with id ${request.params.id}`
+                    })
+                } else {
+                    response.send(data) 
+                }
+            })
+            .catch(err => {
+                console.log(err);
+                response.status(500).send({
+                    message: err.message
                 })
-            }
-
-            return user;
-        })
-        
-        fs.writeFileSync(filePath, JSON.stringify(updatedUsers, null, '\t'));
-
-        return response.status(200).send('User updated successfully');
+            })
     },
 
-    async deleteUsers(request, response) {
-        const users = JSON.parse(fs.readFileSync(filePath));
+    async postUser(request, response) {
+        createUser(request)
+            .then(data => {
+                if (!data) {
+                    response.status(409).send({
+                        message: `User with id ${request.body.user_id} already exists.`
+                    })
+                } else {
+                    response.send(data)
+                }
+            })
+            .catch(err => {
+                response.status(500).send({
+                    message: err.message
+                });
+            });
+    },
 
-        if (users.every(user => user.user_id !== request.params.id)) {
-            response.status(406).send('User ID not found')
-        }
+    async updateUser(request, response) {
+        updateUser(request)
+            .then(data => {
+                if (!data) {
+                    response.status(404).send({
+                    message: `Cannot update user with id ${request.params.id}.`
+                    })
+                } else {
+                    response.send(data)
+                }
+            })
+            .catch(err => {
+                response.status(500).send({
+                    message: err.message
+                });
+            });
+    },
 
-        const updatedUsers = users.filter(user => {
-            return user.user_id !== request.params.id;
-        })
-
-        fs.writeFileSync(filePath, JSON.stringify(updatedUsers, null, '\t'));
-
-        return response.status(200).send('User deleted successfully');
+    async deleteUser(request, response) {
+        deleteUser(request)
+            .then(data => {
+                if (!data) {
+                    response.status(404).send({
+                        message: `Cannot delete user with id ${request.params.id}.`
+                    });
+                } else {
+                    response.send(data);
+                }
+            })
+            .catch(err => {
+                response.status(500).send({
+                    message: err.message
+                });
+            });
     }
 }

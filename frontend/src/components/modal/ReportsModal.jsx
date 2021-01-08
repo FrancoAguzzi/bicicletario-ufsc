@@ -1,21 +1,12 @@
-import React from 'react';
-import { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
 const ReportsModal = props => {
-    const [getReports, setReports] = useState([]);
-
-    useEffect(() => {
-        if (false) {
-            axios.get('http://localhost:3000/reports').then(response => setReports(response.data));
-        }
-    })
-
     const renderReportsTable = () => {
-        if (getReports.length) {
-            return getReports.map((report, index) => {
+        if (props.reportsList.length) {
+            return props.reportsList.map((report, index) => {
                 return (
-                    <tr className="reports__tablerow" key={report.report_id}>
+                    <tr className="reports__tablerow" key={report._id}>
                         <td className="reports__tabledata">{report.report_user.user_id}</td>
                         <td className="reports__tabledata">{report.report_user.user_name}</td>
                         <td className="reports__tabledata">{report.report_date}</td>
